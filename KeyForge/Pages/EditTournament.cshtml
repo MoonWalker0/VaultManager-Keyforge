@@ -1,0 +1,51 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.EditTournamentModel
+@{
+    ViewData["Title"] = "Edycja";
+}
+
+<h2>Edycja turnieju</h2>
+
+<h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="Tournament.Id" />
+    <table class="table">
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+                <a asp-page=".\IndexTournament" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <label asp-for="Tournament.Name"></label>
+        <input asp-for="Tournament.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Description"></label>
+        <input asp-for="Tournament.Description" class="form-control" />
+        <span class="text-danger" asp-validation-for="Tournament.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Private"></label>
+        <input type="checkbox" asp-for="Tournament.Private" class="form-control" />
+        <span class="checkbox" asp-validation-for="Tournament.Private"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.ELOFactor"></label>
+        <input type="number" asp-for="Tournament.ELOFactor" class="form-control" />
+        <span class="text-danger" asp-validation-for="Tournament.ELOFactor"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateFrom"></label>
+        <input type="date" asp-for="Tournament.DateFrom" class="form-control" />
+        <span class="text-danger" asp-validation-for="Tournament.DateFrom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateTo"></label>
+        <input type="date" asp-for="Tournament.DateTo" class="form-control" />
+        <span class="text-danger" asp-validation-for="Tournament.DateTo"></span>
+    </div>
+</form>

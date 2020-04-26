@@ -1,0 +1,95 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.MultiResultModel
+@{
+    ViewData["Title"] = "Nowe wyniki";
+}
+
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <script type="text/javascript">(function () { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();</script>
+    @*<script src="https://kit.fontawesome.com/a076d05399.js"></script>*@
+</head>
+<body>
+    <h2>Zgłoś wiele wyników jednocześnie</h2>
+    <h3>Zwróć uwagę na kolejność zgłoszeń, jest ona bardzo ważna!</h3>
+    <h3>Kolejność: pierwsze - najdawniejsze.</h3> 
+    <table class="table">
+        <tr>
+            <td>
+                <a asp-page=".\ResultHub" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table> 
+    
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <form method="post">
+        <div class="form-group">
+            <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
+            <input id="tournamentFactor" type="hidden" asp-for="Tournament.ELOFactor" />
+            <label>Wybrany turniej</label>
+            <input asp-for="Tournament.Name" class="form-control" readonly />
+            <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+        </div>
+
+        <table id="targetTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h3>Zwycięzcy</h3>
+                    </th>
+                    <th>
+                        <h3>Pokonani</h3>
+                    </th>
+                <tr>
+            </thead>
+            <tbody id="targetBody">
+                <tr id="targetRow">
+                    <td>
+                        <select id="selectWin" class="form-control" name="WinnerIDs"
+                                asp-items="Model.AvailablePlayers">
+                            <option value=""></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="selectLose" class="form-control" name="LoserIDs"
+                                asp-items="Model.AvailablePlayers">
+                            <option value=""></option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table class="table">
+            <tr>
+                <td>
+                    <a id="btn" class="btn" onclick="addRow()">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Zatwierdź</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        var count_id = 0;
+        function addRow() {
+            count_id++;
+            var row = document.getElementById("targetRow");
+            var table = document.getElementById("targetBody");
+
+            var clone = row.cloneNode(true);
+            clone.id = "targetRow" + count_id;
+            table.appendChild(clone);
+        }
+    </script>
+
+</body>
+</html>

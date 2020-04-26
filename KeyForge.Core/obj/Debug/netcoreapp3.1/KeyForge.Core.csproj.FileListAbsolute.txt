@@ -1,0 +1,8 @@
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\bin\Debug\netcoreapp3.1\KeyForge.Core.deps.json
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\bin\Debug\netcoreapp3.1\KeyForge.Core.dll
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\bin\Debug\netcoreapp3.1\KeyForge.Core.pdb
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\obj\Debug\netcoreapp3.1\KeyForge.Core.csprojAssemblyReference.cache
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\obj\Debug\netcoreapp3.1\KeyForge.Core.AssemblyInfoInputs.cache
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\obj\Debug\netcoreapp3.1\KeyForge.Core.AssemblyInfo.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\obj\Debug\netcoreapp3.1\KeyForge.Core.dll
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge.Core\obj\Debug\netcoreapp3.1\KeyForge.Core.pdb

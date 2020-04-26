@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ten plik jest wykorzystywany przez proces publikowania/pakowania projektu internetowego. Możesz dostosować zachowanie tego procesu
+ poprzez edycję tego pliku MSBuild. Aby dowiedzieć się więcej o tym działaniu, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJHg1Y1mHn0eqiXlyinj/iAAAAAACAAAAAAAQZgAAAAEAACAAAADZqwfCBGFj31VEKPRtXky8oc7F37X5Ci6tPqTB6DL/qwAAAAAOgAAAAAIAACAAAABHtkPt053b8GmTIRyzHLVQ2pdsfkt2q/W5gmER1z5xkoAAAAAES7MIwIoHFVqF1uNDEmuPijVoKvp4rBbf0fqluN9nBjOD/oqwirweco+wIMFNFfxgQeBg/SjZ6Xi+ruaSpA1cIvirOpMa4BaaZ3bl/bg0fCOOHbZ7ExvRDRZstcULQWHRMA8JK1R/a6A2yrQW+mMgOMpW7o8AG2P7YYRth1imXEAAAABoN89+0PQ6RQIepbHfd4XzQrHvSErGriEhpfz/X5RPa4RUw5FOUunKvXVfzMmgQO+PXiXwSigNZLwzmXra+frX</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:keyforge20200120101530dbserver.database.windows.net,1433%3bInitial Catalog=KeyForge20200120101530_db%3bUser Id=AndyMaster%40keyforge20200120101530dbserver%3bPassword=JEDIjedi007</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="KeyForge.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:keyforge20200120101530dbserver.database.windows.net,1433%3bInitial Catalog=KeyForge20200120101530_db%3bUser Id=AndyMaster%40keyforge20200120101530dbserver%3bPassword=JEDIjedi007</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

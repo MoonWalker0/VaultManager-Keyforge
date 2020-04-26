@@ -1,0 +1,160 @@
+﻿@page
+@model KeyForge.IndexTournamentModel
+@{
+    ViewData["Title"] = "Przegląd";
+}
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">(function () { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();</script>
+    @*<script src="https://kit.fontawesome.com/a076d05399.js"></script>*@
+</head>
+<body>
+    <h2>Przegląd turniejów</h2>
+
+    @if (Model.Message != null)
+    {
+        <div class="alert alert-info">@Model.Message</div>
+    }
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-page=".\NewTournament" class="btn btn-primary"> Dodaj nowy </a>
+    }
+
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="search" class="form-control"
+                       asp-for="SearchTerm" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Nazwa </th>
+                @*<th> Description </th>*@
+                <th> Termin startu </th>
+                <th> Termin końca </th>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <th> Publiczny? </th>
+                    <th> Biorę udział? </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tournament in Model.Tournament)
+            {
+                <tr>
+                    <td> @tournament.Name </td>
+                    @*
+                        @if (@tournament.Description.Length > 50)
+                        {
+                            <td> @(tournament.Description.Substring(0, 50) + "...") </td>
+                        }
+                        else
+                        {
+                            <td> @tournament.Description </td>
+                        }*@
+                    <td> @(tournament.DateFrom.Date.ToString()) </td>
+                    <td> @(tournament.DateTo.Date.ToString()) </td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @if (@tournament.Private)
+                        {
+                            <td> Nie </td>
+                        }
+                        else
+                        {
+                            <td> Tak </td>
+                        }
+                        @if (tournament.Shops.Contains(User.Identity.Name))
+                        {
+                            <td> Tak </td>
+                        }
+                        else
+                        {
+                            <td> Nie </td>
+                        }
+                    }
+                    <td>
+                        <a class="btn btn-lg"
+                           title="Szczegóły"
+                           asp-page="./DetailTournament"
+                           asp-route-tournamentId="@tournament.Id">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <!-- Only originator can edit -->
+                            @if (tournament.Originator == User.Identity.Name)
+                            {
+                                <a class="btn btn-lg"
+                                   title="Edytuj"
+                                   asp-page="./EditTournament"
+                                   asp-route-tournamentId="@tournament.Id">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            }
+                            <!-- If competition is public (and we are not participant) - add join option -->
+                            @if ((!tournament.Shops.Contains(User.Identity.Name)) && (tournament.Private == false))
+                            {
+                                <a class="btn btn-lg"
+                                   title="Dołącz"
+                                   asp-page="./JoinTournament"
+                                   asp-route-tournamentId="@tournament.Id">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </a>
+                            }
+                            <!--If we are participant add possibility to add results-->
+                            @if (tournament.Shops.Contains(User.Identity.Name))
+                            {
+                                <a class="btn btn-lg"
+                                   title="Dodaj wynik"
+                                   asp-page="./Result"
+                                   asp-route-tournamentId="@tournament.Id">
+                                    <i class="fas fa-plus-square"></i>
+                                </a>
+                                <a class="btn btn-lg"
+                                   title="Dodaj wiele wyników"
+                                   asp-page="./MultiResult"
+                                   asp-route-tournamentId="@tournament.Id">
+                                    <i class="fas fa-cart-plus"></i>
+                                </a>
+                            }
+                        }
+                        <a class="btn btn-lg"
+                           title="Tabela wyników"
+                           asp-page="./ResultTournament"
+                           asp-route-tournamentId="@tournament.Id"
+                           asp-route-orderBy="ELODESC">
+                            <i class="fas fa-medal"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <style>
+        tr {
+            border: 1px solid black;
+        }
+
+        td {
+            width: 10%;
+            border: 1px solid black;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@page "{tournamentName=''}/{winnerId:int=0}/{winnerName=''}/{loserId:int=0}/{loserName=''}"
+@model KeyForge.ResultSummaryModel
+@{
+    ViewData["Title"] = "ResultSummary";
+} 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <td>
+                <h3>Winner</h3>
+                <input type="hidden" asp-for="PlayerWin.Id" />
+                <button id="captureWin" class="btn btn-primary"> Scan winner </button>
+                <label>or select from existing:</label>
+                <select class="form-control" asp-for="PlayerWin.Name"
+                        asp-items="Model.AvailablePlayers"></select>
+                <span class="text-danger"></span>
+
+            </td>
+            <td>
+                <h3>Loser</h3>
+                <input type="hidden" asp-for="PlayerLose.Id" />
+                <button id="captureLose" class="btn btn-primary"> Scan loser </button>
+                <label>or select from existing:</label>
+                <select class="form-control" asp-for="PlayerLose.Name"
+                        asp-items="Model.AvailablePlayers"></select>
+                <span class="text-danger" asp-validation-for="PlayerLose.Name"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form method="get">
+                    <div class="form-group">
+                        <label asp-for="PlayerWin.Name"></label>
+                        <input asp-for="PlayerWin.Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="PlayerWin.Name"></span>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="PlayerLose.Name"></label>
+                    <input asp-for="PlayerLose.Name" class="form-control" />
+                    <span class="text-danger" asp-validation-for="PlayerLose.Name"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

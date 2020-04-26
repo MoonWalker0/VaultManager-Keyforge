@@ -1,0 +1,108 @@
+﻿@page "{playerId:int}/{tournamentId:int}"
+@model KeyForge.PlayerStatsModel
+@{
+	ViewData["Title"] = "Statystyki gracza";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	@*<meta name="viewport" content="width=device-width" />
+		<title>PlayerStats</title>*@
+</head>
+<body onload="mapChart();">
+	<h2>Wyniki dla @Model.Player.Name</h2>
+
+	<form method="post">
+		<table class="table">
+			<tr>
+				<td>
+					<a asp-page=".\ResultTournament"
+					   asp-route-tournamentId="@Model.Tournament.Id"
+					   asp-route-orderBy="ELODESC"
+					   class="btn btn-primary"> Powrót </a>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<form method="get">
+		<table class="table">
+			<tr>
+				<th>Rozegrane gry</th>
+				<th>Wygrane</th>
+				<th>Przegrane</th> 
+			</tr>
+			<tr>
+				<th>@(Model.Wins + Model.Loses)</th>
+				<th>@Model.Wins</th>
+				<th>@Model.Loses</th> 
+			</tr>
+		</table>
+	</form>
+
+	<hr>
+	<hr> 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+	<canvas id="myChart"></canvas>
+
+	<div class="form-group">
+		<input id="tournamentId" type="hidden" asp-for="tournamentHidden" />
+		<input id="playerId" type="hidden" asp-for="playerHidden" />
+	</div>
+
+	<script>
+		const tournamentId = document.getElementById('tournamentId');
+		const playerId = document.getElementById('playerId');
+
+		function mapChart() {
+			var tempTournamentId = tournamentId.value;
+			var tempPlayerId = playerId.value;
+			console.log("mapChart Start");
+			console.log("/PlayerStats/" + tempPlayerId + "/" + tempTournamentId + "/?handler=Data/" + tempPlayerId + "/" + tempTournamentId);
+
+			$.ajax({
+				type: "GET",
+				url: "/PlayerStats/" + tempPlayerId + "/" + tempTournamentId + "/?handler=Data",
+				async: false,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (chData) {
+					//var aData = chData;
+					var aLabels = chData.yAxis;//["HIGH", "MED", "LOW"];//aData[0];
+					var aDatasets1 = chData.xAxis;//[1, 2, 3];//aData[1];
+					var dataT = {
+						labels: aLabels,
+						datasets: [{
+							label: "",
+							data: aDatasets1,
+							fill: true,
+							backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+							borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+							borderWidth: 1
+						}]
+					};
+					//	console.log(aLabels);
+					//	console.log(aDatasets1);
+					var ctx = $("#myChart").get(0).getContext("2d");
+					var myNewChart = new Chart(ctx, {
+						type: 'line',
+						data: dataT,
+						options: {
+							responsive: true,
+							title: { display: true, text: 'Wyniki' },
+							legend: { display: false },
+							scales: {
+								xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: true, labelString: 'Data' } }],
+								yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: true, labelString: 'punkty mELO' }, ticks: { stepSize: 50, beginAtZero: false } }]
+							},
+						}
+					});
+				}
+			});
+		}
+	</script>
+</body>
+</html>

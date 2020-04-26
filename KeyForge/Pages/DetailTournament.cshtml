@@ -1,0 +1,57 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.DetailTournamentModel
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<h2>Szczegóły turnieju</h2>
+
+<form method="post">
+    <table class="table">
+        <tr>
+            <td>
+                <a asp-page=".\IndexTournament" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <label asp-for="Tournament.Name"></label>
+        <input asp-for="Tournament.Name" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Description"></label>
+        <input asp-for="Tournament.Description" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Private"></label>
+        <input type="checkbox" asp-for="Tournament.Private" class="form-control" onclick="return false;" />
+        <span class="checkbox" asp-validation-for="Tournament.Private"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.ELOFactor"></label>
+        <input type="number" asp-for="Tournament.ELOFactor" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.ELOFactor"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateFrom"></label>
+        <input type="date" asp-for="Tournament.DateFrom" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.DateFrom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateTo"></label>
+        <input type="date" asp-for="Tournament.DateTo" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.DateTo"></span>
+    </div>
+    <div class="form-group">
+        <label>Gdzie można zagrać?</label>
+        <textarea asp-for="Places" class="form-control" rows="@Model.PlacesCount" readonly></textarea> 
+    </div>
+</form>

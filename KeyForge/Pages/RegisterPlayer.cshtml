@@ -1,0 +1,149 @@
+﻿@page
+@model KeyForge.RegisterPlayerModel
+@{
+    ViewData["Title"] = "Rejestracja"; 
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+
+    <h2>Zapisz się na turniej</h2>
+    <h4 class="alert-danger">Rejestracja telefonem - trzymaj telefon poziomo.</h4>
+
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <video id="player" controls autoplay class="center-block" style="display: none"></video>
+    <canvas id="canvas" style="display: none"></canvas> <!--style="display: none" width=640 height=480 -->
+
+    <button onclick="stop();gum('user')" id="hCameraFront" class="btn btn-primary" style="display: none"> Kamera przednia </button>
+    <button onclick="stop();gum('environment')" id="hCameraBack" class="btn btn-primary" style="display: none"> Kamera tylnia </button>
+
+    <table class="table">
+        <tr>
+            <td>
+                <button id="captureQR" class="btn btn-primary"> Zeskanuj QR </button>
+                <span class="text-danger"></span>
+            </td>
+        </tr>
+    </table>
+
+    <form method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label>Wybierz turniej</label>
+                        <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
+                        <select class="form-control" asp-for="Tournament.Name"
+                                asp-items="Model.AvailableTournaments">
+                            <option value=""></option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!--hidden-->
+        <input type="hidden" asp-for="Tournament.Name" />
+        <input type="hidden" asp-for="Tournament.Id" />
+        <!--hidden-->
+
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <input id="playerId" type="hidden" asp-for="ScannedPlayer.KFId" />
+                        <label asp-for="ScannedPlayer.Name"></label>
+                        <input readonly id="playerName" asp-for="ScannedPlayer.Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="ScannedPlayer.Name"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Default">Zatwierdź</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        const player = document.getElementById('player');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const playerID = document.getElementById('playerId');
+        const playerName = document.getElementById('playerName');
+        const cameraButton1 = document.getElementById('hCameraFront');
+        const cameraButton2 = document.getElementById('hCameraBack');
+        //const tournamentId = document.getElementById('tournamentId');
+        var timeHandler;
+
+        var gum = face =>
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: { exact: face },
+                    width: { min: 320, ideal: 1280, max: 1920 },
+                    height: { min: 240, ideal: 720, max: 1080 }
+                }
+            })
+                .then(stream => (player.srcObject = stream))
+                .catch();
+
+        var stop = () => player.srcObject && player.srcObject.getTracks().map(t => t.stop());
+
+        document.getElementById('captureQR').addEventListener('click', () => {
+            //player.style.display = "block";
+            canvas.style.display = "block";
+            cameraButton1.style.display = "block";
+            cameraButton2.style.display = "block";
+            clearTimeout(timeHandler);
+            stop(); gum('user');
+            timeHandler = setTimeout(doAjax, 500);
+        });
+
+        function doAjax() {
+            context.drawImage(player, 0, 0, canvas.width, canvas.height);
+            var tempCapture = canvas.toDataURL();
+            var tempPlayerID = playerID.value;
+            var tempPlayerName = playerName.value;
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/RegisterPlayer/?handler=QRData",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    data: JSON.stringify({
+                        Frame: tempCapture,
+                        PlayerID: tempPlayerID,
+                        PlayerName: tempPlayerName
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        $('#playerId').val(response.playerID);
+                        $('#playerName').val(response.playerName);
+                        $('#canvas').hide();
+                        $('#hCameraFront').hide();
+                        $('#hCameraBack').hide();
+                        clearTimeout(timeHandler);
+                    },
+                    failure: function (response) {
+                        alert(response);
+                    }
+                });
+
+            timeHandler = setTimeout(doAjax, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp3.1\KeyForge.csprojAssemblyReference.cache
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp3.1\KeyForge.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp3.1\KeyForge.AssemblyInfoInputs.cache
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp3.1\KeyForge.AssemblyInfo.cs

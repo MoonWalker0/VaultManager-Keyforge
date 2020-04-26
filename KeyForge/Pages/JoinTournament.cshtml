@@ -1,0 +1,52 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.JoinTournamentModel
+@{
+    ViewData["Title"] = "Dołącz";
+}
+
+<h2>Dołącz do turnieju</h2>
+<h3>Nie można opuścić turnieju, do którego raz dołączono.</h3>
+<h3>Upewnij się, że chcesz dołączyć do poniższego turnieju.</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="Tournament.Id" />
+    <input type="hidden" asp-for="Tournament.Shops" />
+    <table class="table">
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-primary">Dołącz</button>
+                <a asp-page=".\IndexTournament" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <label asp-for="Tournament.Name"></label>
+        <input asp-for="Tournament.Name" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Description"></label>
+        <input asp-for="Tournament.Description" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.Private"></label>
+        <input type="checkbox" asp-for="Tournament.Private" class="form-control" onclick="return false;" />
+        <span class="checkbox" asp-validation-for="Tournament.Private"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.ELOFactor"></label>
+        <input type="number" asp-for="Tournament.ELOFactor" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.ELOFactor"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateFrom"></label>
+        <input type="date" asp-for="Tournament.DateFrom" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.DateFrom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tournament.DateTo"></label>
+        <input type="date" asp-for="Tournament.DateTo" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="Tournament.DateTo"></span>
+    </div>
+</form>

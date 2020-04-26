@@ -1,0 +1,210 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.ResultModel
+@{
+    ViewData["Title"] = "Nowy wynik"; 
+}
+ 
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <h2>Zgłoś nowy wynik</h2>
+    <h4 class="alert-danger">Rejestracja telefonem - trzymaj telefon poziomo.</h4>
+
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <video id="player" controls autoplay class="center-block" style="display: none"></video>
+    <canvas id="canvas" style="display: none"></canvas> <!--style="display: none" width=320 height=240 -->
+
+    <form method="post">
+        <div class="form-group">
+            <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
+            <input id="tournamentFactor" type="hidden" asp-for="Tournament.ELOFactor" />
+            <label>Wybrany turniej</label>
+            <input asp-for="Tournament.Name" class="form-control" readonly />
+            <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+        </div>
+    </form>
+    <table class="table">
+        <tr>
+            <td>
+                <a asp-page=".\ResultHub" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>
+
+    <input id="hScannedPlayer" type="hidden" asp-for="ScannedPlayer" />
+    <button onclick="stop();gum('user')" id="hCameraFront" class="btn btn-primary" style="display: none"> Kamera przednia </button>
+    <button onclick="stop();gum('environment')" id="hCameraBack" class="btn btn-primary" style="display: none"> Kamera tylnia </button>
+
+    <table class="table">
+        <tr>
+            <td>
+                <h3>Zwycięzca</h3>
+                <button id="captureWin" class="btn btn-primary"> Zeskanuj QR </button>
+                <label>lub wybierz z bazy graczy:</label>
+                <select id="selectWin" class="form-control" asp-for="PlayerWin.Name"
+                        asp-items="Model.AvailablePlayers" onchange="selectWinner()">
+                    <option value=""></option>
+                </select>
+                <span class="text-danger"></span>
+
+            </td>
+            <td>
+                <h3>Pokonany</h3>
+                <button id="captureLose" class="btn btn-primary"> Zeskanuj QR </button>
+                <label>lub wybierz z bazy graczy:</label>
+                <select id="selectLose" class="form-control" asp-for="PlayerLose.Name"
+                        asp-items="Model.AvailablePlayers" onchange="selectLoser()">
+                    <option value=""></option>
+                </select>
+                <span class="text-danger"></span>
+            </td>
+        </tr>
+    </table>
+
+    <form method="post">
+        <!--hidden-->
+        <input type="hidden" asp-for="Tournament.ELOFactor" />
+        <input type="hidden" asp-for="Tournament.Id" />
+        <!--hidden-->
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <input id="winnerId" type="hidden" asp-for="PlayerWin.KFId" />
+                        <label asp-for="PlayerWin.Name"></label>
+                        <input readonly id="winnerName" asp-for="PlayerWin.Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="PlayerWin.Name"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input id="loserId" type="hidden" asp-for="PlayerLose.KFId" />
+                        <label asp-for="PlayerLose.Name"></label>
+                        <input readonly id="loserName" asp-for="PlayerLose.Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="PlayerLose.Name"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Default">Zatwierdź</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        const player = document.getElementById('player');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const hiddenPlayer = document.getElementById('hScannedPlayer');
+        const playerWinnerID = document.getElementById('winnerId');
+        const playerWinnerName = document.getElementById('winnerName');
+        const playerLoserID = document.getElementById('loserId');
+        const playerLoserName = document.getElementById('loserName');
+        const cameraButton1 = document.getElementById('hCameraFront');
+        const cameraButton2 = document.getElementById('hCameraBack');
+        const tournamentId = document.getElementById('tournamentId');
+        var timeHandler;
+
+        var gum = face =>
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: { exact: face },
+                    width: { min: 320, ideal: 1280, max: 1920 },
+                    height: { min: 240, ideal: 720, max: 1080 }
+                }
+            })
+                .then(stream => (player.srcObject = stream))
+                .catch();
+
+        var stop = () => player.srcObject && player.srcObject.getTracks().map(t => t.stop());
+
+        document.getElementById('captureWin').addEventListener('click', () => {
+            hiddenPlayer.value = "Winner";
+            player.style.display = "block";
+            cameraButton1.style.display = "block";
+            cameraButton2.style.display = "block";
+            clearTimeout(timeHandler);
+            stop(); gum('user');
+            timeHandler = setTimeout(doAjax, 500);
+        });
+
+        document.getElementById('captureLose').addEventListener('click', () => {
+            hiddenPlayer.value = "Loser";
+            canvas.style.display = "block";
+            cameraButton1.style.display = "block";
+            cameraButton2.style.display = "block";
+            clearTimeout(timeHandler);
+            stop(); gum('user');
+            timeHandler = setTimeout(doAjax, 500);
+        });
+
+        function doAjax() {
+            context.drawImage(player, 0, 0, canvas.width, canvas.height);
+            var tempCapture = canvas.toDataURL();
+            var tempScanned = hiddenPlayer.value;
+            var tempWinnerID = playerWinnerID.value;
+            var tempLoserID = playerLoserID.value;
+            var tempWinnerName = playerWinnerName.value;
+            var tempLoserName = playerLoserName.value;
+            var tempTournamentId = tournamentId.value;
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/Result/" + tempTournamentId + "/?handler=QRData",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    data: JSON.stringify({
+                        Frame: tempCapture,
+                        Scanned: tempScanned,
+                        WinnerID: tempWinnerID,
+                        WinnerName: tempWinnerName,
+                        LoserID: tempLoserID,
+                        LoserName: tempLoserName
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        $('#winnerId').val(response.winnerID);
+                        $('#winnerName').val(response.winnerName);
+                        $('#loserId').val(response.loserID);
+                        $('#loserName').val(response.loserName);
+                        $('#canvas').hide();
+                        $('#hCameraFront').hide();
+                        $('#hCameraBack').hide();
+                        clearTimeout(timeHandler);
+                    },
+                    failure: function (response) {
+                        alert(response);
+                    }
+                });
+
+            timeHandler = setTimeout(doAjax, 500);
+        }
+
+        function selectWinner() {
+            const temp = document.getElementById('selectWin')
+            document.getElementById('winnerName').value = temp.options[temp.selectedIndex].text
+            document.getElementById('winnerId').value = temp.options[temp.selectedIndex].value
+        }
+
+        function selectLoser() {
+            const temp = document.getElementById('selectLose')
+            document.getElementById('loserName').value = temp.options[temp.selectedIndex].text
+            document.getElementById('loserId').value = temp.options[temp.selectedIndex].value
+        }
+
+    </script>
+
+</body>
+    </html>

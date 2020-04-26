@@ -1,0 +1,45 @@
+﻿@page
+@model KeyForge.ResultHubModel
+@{
+    ViewData["Title"] = "Nowy wynik"; 
+}
+
+<!DOCTYPE html>
+
+<html>
+<head> 
+</head>
+<body>
+    <h2>Wybierz turniej, do którego chcesz zgłosić wynik</h2>
+
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <form method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label>Wybierz turniej</label>
+                        <select class="form-control" asp-for="Tournament.Name"
+                                asp-items="Model.AvailableTournaments">
+                            <option value=""></option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Single">Dodaj wynik</button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Multi">Dodaj wiele wyników</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

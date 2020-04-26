@@ -1,0 +1,67 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "O managerze";
+}
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h2>@ViewData["Title"]</h2>
+
+    <h3>Jak to działa?</h3>
+    <p>
+        Grając w dowolnym formacie (turniej zorganizowany / przypadkowa rozgrywka) w GOSU oraz w Drafcie,<br />
+        należy zgłosić wynik osobom zarządzającym danym miejscem.<br />
+        Wynik liczyć się będzie do rankingu aktualnie rozgrywanego turnieju sezonowego.<br />
+        Pierwsza rozgrywka, w danym turnieju, wymaga zarejestrowania się poprzez zeskanowanie kodu QR, który jest przypisany do Twojego konta Keyforge.<br />
+        Ranking obliczany jest zgodnie z mELO (więcej poniżej).
+    </p>
+
+    <h3>Czym jest mELO?</h3>
+    <p>
+        ELO to system punktacji początkowo wykorzystywany przez szachistów.
+        W skrócie, dla każdej partii obliczane jest prawdopodobieństwo zwycięstwa i przegranej każdego gracza,<br />
+        w parze ze współczynnikiem, który odpowiada za dynamiczność zmian rankingu, uzyskujemy system, który pozwala na zachowanie równowagi rozgrywek graczy dobrych i słabych.<br />
+        Punkty przyznane słabemu graczowi, który wygrał z graczem dobrym (na bazie aktualnego rankingu) są skrajnie wyższe niż jeżeli wygrałby gracz dobry. <br />
+        Więcej o rankingu ELO można poczytać <a href="https://en.wikipedia.org/wiki/Elo_rating_system">tutaj</a>. <br /><br /> 
+        mELO to modyfikacja wprowadzona na potrzeby ligi - zwycięzca, poza punktami, które dostałby w ramach meczu, dostaje dodatkowo 10% bonusu od tych punktów. <br />
+    </p>
+
+    <h3>Uwagi / awarie / błędy</h3>
+    <p>
+        Serwis tworzony jest amatorsko i wolontaryjnie "od fana dla fanów" - jeżeli znajdziesz błąd lub masz cenną uwagę, która mogłaby popawić funkcjonowanie serwisu - <br />
+        zapraszam do <a href="mailto: jedrzej.peziak@wp.pl">kontaktu</a>.
+    </p>
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h3>Dla organizatorów</h3>
+        <p>
+            1. Dodaj turniej <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; a. Turniej prywatny nie pozwala innym na przesyłanie wyników rozgrywek. Jest natomiast możliwa rejestracja na taki turniej. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; b. Wszystkie turnieje są widoczne dla wszystkich organizatorów oraz graczy. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; c. Zwiększenie wartości współczynnika ELO powoduje zwiększenie dynamiki zmian na tabeli wyników. <br />
+            2. Wyślij wyniki <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; a. Należy określić na jaki turniej mają być przesłane wyniki. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; b. Jeżeli turniej nie jest widoczny, upewnij się, że jego data końca nie została osiągnięta. Można ją zmienić w edycji turnieju. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; c. Jeżeli turniej nie jest widoczny, a nie jesteś jego organizatorem - dołącz do niego na stronie przeglądu turniejów. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; d. Wysyłanie wyników jest możliwe w dwóch opcjach: pojedyncze oraz masowe. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; e. Przesyłanie pojedyncze może odbywać się poprzez odczytanie kodu QR obu graczy lub wybraniu ich z listy (jeżeli wcześniej brali udział w danym turnieju). <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; f. Przesyłanie masowe wymaga wcześniejszej rejestracji graczy na dany turniej <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(można to wykonać poprzez osobny formualarz "Rejestracja gracza", gdzie odbywa się skanowanie jednego kodu QR). <br />
+            3. Określ zwycięzców <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; a. Dla każdego turnieju prowadzona jest osobna tabela wyników. <br />
+            &nbsp;&nbsp;&nbsp;&nbsp; b. Do turnieju można dostać się poprzez stronę przeglądu wszystkich turniejów. <br />
+
+            <br />
+            Uwagi: <br />
+            - Adres i nazwa firmy są widoczne dla osób, które przeglądają turnieje, jako informacja, gdzie odbywa się wydarzenie.
+
+        </p>
+    }
+</body>
+</html>

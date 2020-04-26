@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyForge.Core", "KeyForge.Core\KeyForge.Core.csproj", "{D4D9AD57-29B6-43C6-925B-A652ACD51001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyForge", "KeyForge\KeyForge.csproj", "{7E29AC9A-CCF3-48F6-A830-1134A06B63BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4D9AD57-29B6-43C6-925B-A652ACD51001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D9AD57-29B6-43C6-925B-A652ACD51001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D9AD57-29B6-43C6-925B-A652ACD51001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D9AD57-29B6-43C6-925B-A652ACD51001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E29AC9A-CCF3-48F6-A830-1134A06B63BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E29AC9A-CCF3-48F6-A830-1134A06B63BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E29AC9A-CCF3-48F6-A830-1134A06B63BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E29AC9A-CCF3-48F6-A830-1134A06B63BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D5D9A72-669A-4F0B-96ED-A825CD2F3A16}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,202 @@
+﻿@page "{tournamentId:int}/{orderBy}"
+@model KeyForge.ResultTournamentModel
+@{
+    ViewData["Title"] = "Ranking";
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">(function () { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();</script>
+    @*<script src="https://kit.fontawesome.com/a076d05399.js"></script>*@
+</head>
+<body>
+    <h2>Wyniki dla @Model.Tournament.Name</h2>
+
+    <form method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <a asp-page=".\IndexTournament" class="btn btn-primary"> Powrót </a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
+    <input type="hidden" asp-for="Tournament.Name" />
+    <input id="orderBy" type="hidden" asp-for="OrderProperty" />
+
+    <table class="table">
+        <thead>
+            <form method="get">
+                <tr>
+                    <th> # </th>
+                    <th>
+                        @{ if (Model.OrderProperty == "NAMEDESC")
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="NAMEASC">
+                                    Gracz
+                                </button>
+                                <i class="fas fa-arrow-up"></i>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="NAMEDESC">
+                                    Gracz
+                                </button>
+                                if (Model.OrderProperty == "NAMEDESC")
+                                {
+                                    <i class="fas fa-arrow-down"></i>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{ if (Model.OrderProperty == "ELODESC")
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="ELOASC">
+                                    ELO
+                                </button>
+                                <i class="fas fa-arrow-up"></i>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="ELODESC">
+                                    ELO
+                                </button>
+                                if (Model.OrderProperty == "ELOASC")
+                                {
+                                    <i class="fas fa-arrow-down"></i>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{ if (Model.OrderProperty == "GAMEDESC")
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="GAMEASC">
+                                    Gry
+                                </button>
+                                <i class="fas fa-arrow-up"></i>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="GAMEDESC">
+                                    Gry
+                                </button>
+                                if (Model.OrderProperty == "GAMEASC")
+                                {
+                                    <i class="fas fa-arrow-down"></i>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{ if (Model.OrderProperty == "WINDESC")
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="WINASC">
+                                    Zwycięstwa
+                                </button>
+                                <i class="fas fa-arrow-up"></i>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="WINDESC">
+                                    Zwycięstwa
+                                </button>
+                                if (Model.OrderProperty == "WINASC")
+                                {
+                                    <i class="fas fa-arrow-down"></i>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{ if (Model.OrderProperty == "LOSEDESC")
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="LOSEASC">
+                                    Przegrane
+                                </button>
+                                <i class="fas fa-arrow-up"></i>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default"
+                                        asp-page="./ResultTournament/"
+                                        asp-route-tournamentId="@Model.Tournament.Id"
+                                        asp-route-orderBy="LOSEDESC">
+                                    Przegrane
+                                </button>
+                                if (Model.OrderProperty == "LOSEASC")
+                                {
+                                    <i class="fas fa-arrow-down"></i>
+                                }
+                            }
+                        }
+                    </th>
+                    <th></th>
+                </tr>
+            </form>
+        </thead>
+        <tbody>
+            @{ var i = 1; }
+            @foreach (var row in Model.Leaderboard)
+            {
+                string color = (i == 1) ? "#FEE101" : (i == 2) ? "#D7D7D7" : (i == 3) ? "#A77044" : "#FFFFFF";
+                <tr bgcolor="@color">
+                    <td> @i </td>
+                    <td> @row.PlayerName </td>
+                    <td> @row.ELOScore </td>
+                    <td> @(row.WinGames + row.LoseGames) </td>
+                    <td> @row.WinGames </td>
+                    <td> @row.LoseGames </td>
+                    <td>
+                        <a class="input-group-btn"
+                           asp-page="./PlayerStats"
+                           asp-route-tournamentId="@Model.Tournament.Id"
+                           asp-route-playerId="@row.PlayerID">
+                            <button class="btn btn-default">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</body>
+</html>

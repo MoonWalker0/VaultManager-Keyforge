@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Vault Manager";
+}
+@inject SignInManager<IdentityUser> SignInManager
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<h3>Manager turniejów Keyforge na bazie rankingu mELO (modyfikowany ELO)</h3>
+<br /><br />
+
+<h2> Ostatnie 10 wyników </h2>
+<table class="table">
+    <tr>
+        <th> # </th>
+        <th> Zwycięzca </th>
+        <th> Pokonany </th>
+        <th> Turniej </th>
+        <th> + </th>
+        <th> - </th>
+        <th> ELO zwycięzcy </th>
+        <th> ELO pokonanego </th>
+        <th> Data </th>
+    </tr>
+    @{ var i = 1; }
+    @foreach (var row in Model.History)
+    {
+        <tr>
+            <td> @i </td>
+            <td> @row.PlayerWin </td>
+            <td> @row.PlayerLose </td>
+            <td> @row.Tournament </td>
+            <td> @row.WinIncrease </td>
+            <td> @row.LoseDecrease </td>
+            <td> @row.WinFinalELO </td>
+            <td> @row.LoseFinalELO </td>
+            <td> @row.Date </td>
+        </tr>
+        i++;
+    }
+</table>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ten plik jest wykorzystywany przez proces publikowania/pakowania projektu internetowego. Możesz dostosować zachowanie tego procesu
+ poprzez edycję tego pliku MSBuild. Aby dowiedzieć się więcej o tym działaniu, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJHg1Y1mHn0eqiXlyinj/iAAAAAACAAAAAAAQZgAAAAEAACAAAABS5Gj6y3949skRjs0tpVpKgT2nLkjnFS7LIxUuXLh1DQAAAAAOgAAAAAIAACAAAACRyUMqLiq1atSpwzVT4VWoIOWW3TXMPDDY/Ttb9s/jpYAAAABIKcKvYeaL6fLg4eZcVYYH0L5kr802bjZe6tiezoUw/LuvdkeAWQ+hJoevxDfG5nDhMpIek9uZeAM1q6CzrKDiLBmvunM5xBYCHpaPPUWhMN9Kc6OoUMGoFbmpcuraz8zEsWV0Es0fWs6JNk28vsu7lInTxjFKYcObqlmuNi7ckkAAAAAOOYpDw5qJesa5fmRSd0eAUI7KZSSQ+VCpSTnt1JphiyeEocz9YfGNuRzb/yREfwQMF2MYaxgPGwtyaQihzR/a</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:vaultmanagerdbserver.database.windows.net,1433%3bInitial Catalog=VaultManager_db%3bUser Id=AndyMaster%40vaultmanagerdbserver%3bPassword=JEDIjedi007</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="KeyForge.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:vaultmanagerdbserver.database.windows.net,1433%3bInitial Catalog=VaultManager_db%3bUser Id=AndyMaster%40vaultmanagerdbserver%3bPassword=JEDIjedi007</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
