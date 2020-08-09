@@ -1,0 +1,122 @@
+﻿@page "{tournamentId:int}"
+@model AttachmentHubModel
+@{
+    ViewData["Title"] = "Pliki";
+}
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">(function () { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();</script>
+</head>
+<body>
+    @if (Model.Message != null)
+    {
+        <div class="alert alert-info">@Model.Message</div>
+    }
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <form method="post">
+            <table class="table">
+                <tr>
+                    <td>
+                        <a asp-page=".\AttachmentAdd" class="btn btn-primary"> Dodaj plik </a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    }
+
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Nazwa </th>
+                            <th> Przypisany turniej </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="search" class="form-control"
+                                       asp-for="SearchTerm" />
+                            </td>
+                            <td>
+                                <select class="form-control" asp-for="SearchTournamentID"
+                                        asp-items="Model.AvailableTournaments">
+                                    <option value=""></option>
+                                </select>
+                            </td>
+                            <td>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Nazwa </th>
+                <th> Opis </th>
+                <th> Autor </th>
+                <th> Turniej </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attachment in Model.Attachments)
+            {
+                <tr>
+                    <td> @attachment.Name </td>
+                    <td> @attachment.ShortDescription </td>
+                    <td> @attachment.Author </td>
+                    <td> @attachment.Tournament </td>
+                    <td>
+                        <a class="btn btn-lg"
+                           title="Zobacz"
+                           asp-page="./AttachmentView"
+                           asp-route-attachmentId="@attachment.Id">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        @*<a class="btn btn-lg"
+                               title="Pobierz"
+                               asp-page="./AttachmentDownload"
+                               asp-route-tournamentId="@attachment.Id">
+                                <i class="fas fa-download"></i>
+                            </a>*@
+                        @if (User.Identity.Name == attachment.Email)
+                        {
+                            <a class="btn btn-lg"
+                               title="Usuń"
+                               asp-page="./AttachmentDelete"
+                               asp-route-attachmentId="@attachment.Id">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a class="btn btn-lg"
+                               title="Edytuj"
+                               asp-page="./AttachmentUpdate"
+                               asp-route-attachmentId="@attachment.Id">
+                                <i class="fas fa-wrench"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

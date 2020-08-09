@@ -1,0 +1,35 @@
+﻿@page "{attachmentId:int}"
+@model KeyForge.AttachmentViewModel
+@{
+    ViewData["Title"] = "Obejrzyj załącznik";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AttachmentView</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <td>
+                <a asp-page=".\AttachmentHub" asp-route-tournamentId="0" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>    
+    <table class="table">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label>Opis</label>
+                    <textarea asp-for="Attachment.Description" class="form-control" rows = "5" readonly> </textarea>
+                    <span class="text-danger" asp-validation-for="Attachment.Description"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <object data=@Model.Attachment.Data type="application/pdf" style="width: 100%; height: 600px"></object>
+</body>
+</html>

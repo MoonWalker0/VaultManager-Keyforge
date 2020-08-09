@@ -14,27 +14,52 @@
 <body>
     <h2>Zgłoś wiele wyników jednocześnie</h2>
     <h3>Zwróć uwagę na kolejność zgłoszeń, jest ona bardzo ważna!</h3>
-    <h3>Kolejność: pierwsze - najdawniejsze.</h3> 
+    <h3>Kolejność: pierwsze - najdawniejsze.</h3>
     <table class="table">
         <tr>
             <td>
                 <a asp-page=".\ResultHub" class="btn btn-primary"> Powrót </a>
             </td>
         </tr>
-    </table> 
-    
+    </table>
+
     <h3 style="background-color:red;">@Model.ErrorMsg</h3>
 
     <form method="post">
         <div class="form-group">
             <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
             <input id="tournamentFactor" type="hidden" asp-for="Tournament.ELOFactor" />
-            <label>Wybrany turniej</label>
-            <input asp-for="Tournament.Name" class="form-control" readonly />
-            <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+            <table class="table">
+                <tr>
+                    <td>
+                        <label>Wybrany turniej</label>
+                        <input asp-for="Tournament.Name" class="form-control" readonly />
+                        <span class="text-danger" asp-validation-for="Tournament.Name"></span> 
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <table id="targetTable" class="table">
+        @section Scripts
+        {
+            <script src="//code.jquery.com/jquery.min.js"></script>
+            <link rel="stylesheet" href="~/lib/jquery-custom-search/jquery.dropdown.css">
+            <script src="~/lib/jquery-custom-search/jquery.dropdown.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.winner').dropdown({
+                        minCount: 0,
+                        searchable: true
+                    });
+                    $('.loser').dropdown({
+                        minCount: 0,
+                        searchable: true
+                    });
+                });
+            </script>
+        }
+
+        <table id="targetTable" class="table" style="table-layout:fixed;">
             <thead>
                 <tr>
                     <th>
@@ -48,16 +73,20 @@
             <tbody id="targetBody">
                 <tr id="targetRow">
                     <td>
-                        <select id="selectWin" class="form-control" name="WinnerIDs"
-                                asp-items="Model.AvailablePlayers">
-                            <option value=""></option>
-                        </select>
+                        <div class="winner">
+                            <select style="display:none" id="selectWin" class="form-control" name="WinnerIDs"
+                                    asp-items="Model.AvailablePlayers">
+                                <option value=""></option>
+                            </select>
+                        </div>
                     </td>
                     <td>
-                        <select id="selectLose" class="form-control" name="LoserIDs"
-                                asp-items="Model.AvailablePlayers">
-                            <option value=""></option>
-                        </select>
+                        <div class="loser">
+                            <select style="display:none" id="selectLose" class="form-control" name="LoserIDs"
+                                    asp-items="Model.AvailablePlayers">
+                                <option value=""></option>
+                            </select>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -68,7 +97,7 @@
             <tr>
                 <td>
                     <a id="btn" class="btn" onclick="addRow()">
-                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-plus-circle"> Dodaj wiersz </i>
                     </a>
                 </td>
                 <td>
@@ -77,7 +106,7 @@
             </tr>
         </table>
     </form>
-
+     
     <script>
         var count_id = 0;
         function addRow() {
@@ -87,7 +116,27 @@
 
             var clone = row.cloneNode(true);
             clone.id = "targetRow" + count_id;
+
+            //Change classname for easier initialization
+            clone.childNodes[1].childNodes[1].className = "winner" + count_id;
+            clone.childNodes[3].childNodes[1].className = "loser" + count_id;
+
+            //Create row and initialize jQuery
             table.appendChild(clone);
+            jQuery(document).ready(function () {
+                $('.winner' + (count_id)).dropdown({
+                    minCount: 0,
+                    searchable: true
+                });
+                $('.loser' + (count_id)).dropdown({
+                    minCount: 0,
+                    searchable: true
+                });
+            });
+
+            //Workaround - remove duplicated row (for jquery)
+            document.getElementsByClassName("winner" + count_id)[0].childNodes[3].remove();
+            document.getElementsByClassName("loser" + count_id)[0].childNodes[3].remove();
         }
     </script>
 

@@ -50,6 +50,7 @@
                     <th> Publiczny? </th>
                     <th> Biorę udział? </th>
                 }
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -87,74 +88,70 @@
                             <td> Nie </td>
                         }
                     }
-                    <td>
-                        <a class="btn btn-lg"
-                           title="Szczegóły"
-                           asp-page="./DetailTournament"
-                           asp-route-tournamentId="@tournament.Id">
-                            <i class="fas fa-search"></i>
-                        </a>
-                        @if (SignInManager.IsSignedIn(User))
+                <td>
+                    <a class="btn btn-lg"
+                       title="Szczegóły"
+                       asp-page="./DetailTournament"
+                       asp-route-tournamentId="@tournament.Id">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <!-- Only originator can edit -->
+                        @if (tournament.Originator == User.Identity.Name)
                         {
-                            <!-- Only originator can edit -->
-                            @if (tournament.Originator == User.Identity.Name)
-                            {
-                                <a class="btn btn-lg"
-                                   title="Edytuj"
-                                   asp-page="./EditTournament"
-                                   asp-route-tournamentId="@tournament.Id">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            }
-                            <!-- If competition is public (and we are not participant) - add join option -->
-                            @if ((!tournament.Shops.Contains(User.Identity.Name)) && (tournament.Private == false))
-                            {
-                                <a class="btn btn-lg"
-                                   title="Dołącz"
-                                   asp-page="./JoinTournament"
-                                   asp-route-tournamentId="@tournament.Id">
-                                    <i class="fas fa-sign-in-alt"></i>
-                                </a>
-                            }
-                            <!--If we are participant add possibility to add results-->
-                            @if (tournament.Shops.Contains(User.Identity.Name))
-                            {
-                                <a class="btn btn-lg"
-                                   title="Dodaj wynik"
-                                   asp-page="./Result"
-                                   asp-route-tournamentId="@tournament.Id">
-                                    <i class="fas fa-plus-square"></i>
-                                </a>
-                                <a class="btn btn-lg"
-                                   title="Dodaj wiele wyników"
-                                   asp-page="./MultiResult"
-                                   asp-route-tournamentId="@tournament.Id">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                            }
+                            <a class="btn btn-lg"
+                               title="Edytuj"
+                               asp-page="./EditTournament"
+                               asp-route-tournamentId="@tournament.Id">
+                                <i class="fas fa-edit"></i>
+                            </a>
                         }
-                        <a class="btn btn-lg"
-                           title="Tabela wyników"
-                           asp-page="./ResultTournament"
-                           asp-route-tournamentId="@tournament.Id"
-                           asp-route-orderBy="ELODESC">
-                            <i class="fas fa-medal"></i>
-                        </a>
-                    </td>
+                        <!-- If competition is public (and we are not participant) - add join option -->
+                        @if ((!tournament.Shops.Contains(User.Identity.Name)) && (tournament.Private == false))
+                        {
+                            <a class="btn btn-lg"
+                               title="Dołącz"
+                               asp-page="./JoinTournament"
+                               asp-route-tournamentId="@tournament.Id">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </a>
+                        }
+                        <!--If we are participant add possibility to add results-->
+                        @if (tournament.Shops.Contains(User.Identity.Name))
+                        {
+                            <a class="btn btn-lg"
+                               title="Dodaj wynik"
+                               asp-page="./Result"
+                               asp-route-tournamentId="@tournament.Id">
+                                <i class="fas fa-plus-square"></i>
+                            </a>
+                            <a class="btn btn-lg"
+                               title="Dodaj wiele wyników"
+                               asp-page="./MultiResult"
+                               asp-route-tournamentId="@tournament.Id">
+                                <i class="fas fa-cart-plus"></i>
+                            </a>
+                            <a class="btn btn-lg"
+                               title="Dodaj wyniki z GEM"
+                               asp-page="./GEMResult"
+                               asp-route-tournamentId="@tournament.Id">
+                                <i class="fas fa-gem"></i>
+                            </a>
+                        }
+                    }
+                    <a class="btn btn-lg"
+                       title="Tabela wyników"
+                       asp-page="./ResultTournament"
+                       asp-route-tournamentId="@tournament.Id"
+                       asp-route-orderBy="ELODESC">
+                        <i class="fas fa-medal"></i>
+                    </a>
+                </td>
 
                 </tr>
             }
         </tbody>
     </table>
-    <style>
-        tr {
-            border: 1px solid black;
-        }
-
-        td {
-            width: 10%;
-            border: 1px solid black;
-        }
-    </style>
 </body>
 </html>

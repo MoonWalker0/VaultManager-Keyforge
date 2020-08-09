@@ -107,7 +107,6 @@ C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Debug\netcoreapp2.1\KeyForge.Core.dll
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Debug\netcoreapp2.1\KeyForge.Core.pdb
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\Home.cshtml.g.cs
-C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\Result.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\NewTournament.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\IndexTournament.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\DetailTournament.cshtml.g.cs
@@ -116,9 +115,17 @@ C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\JoinTournament.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\ResultTournament.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\Shared\ResultSummary.cshtml.g.cs
-C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\ResultHub.cshtml.g.cs
-C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\MultiResult.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\RegisterPlayer.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\PlayerStats.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\Changelog.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Debug\netcoreapp2.1\wwwroot\css\site.css
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\MultiResult.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\Result.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\ResultHub.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\GEMResult.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\AttachmentHub.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\AttachmentAdd.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\AttachmentDelete.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\AttachmentUpdate.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Debug\netcoreapp2.1\Razor\Pages\AttachmentView.cshtml.g.cs

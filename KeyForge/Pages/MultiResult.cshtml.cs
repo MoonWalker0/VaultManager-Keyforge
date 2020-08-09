@@ -40,6 +40,12 @@ namespace KeyForge
                           where r.Id == tournamentId
                           select r).FirstOrDefault();
 
+            //Check if author
+            if (Tournament.Originator != User.Identities.FirstOrDefault().Name)
+            {
+                return RedirectToPage("./NotFound");
+            }
+
             AvailablePlayers = (from r2 in _db.ELOTable
                                 join r1 in _db.Player on r2.TournamentId equals tournamentId
                                 where r2.PlayerId == r1.KFId 
@@ -54,6 +60,12 @@ namespace KeyForge
             Tournament = (from r in _db.Tournament
                           where r.Id == Tournament.Id
                           select r).FirstOrDefault();
+
+            //Check if author
+            if (!_signInManager.IsSignedIn(User) || Tournament.Originator != User.Identities.FirstOrDefault().Name)
+            {
+                return RedirectToPage("./NotFound");
+            }
 
             AvailablePlayers = (from r2 in _db.ELOTable
                                 join r1 in _db.Player on r2.TournamentId equals Tournament.Id

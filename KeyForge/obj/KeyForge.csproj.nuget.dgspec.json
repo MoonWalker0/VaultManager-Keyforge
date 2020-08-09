@@ -148,6 +148,10 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.18.0, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[4.7.0, )"

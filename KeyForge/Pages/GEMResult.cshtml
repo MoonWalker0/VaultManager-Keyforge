@@ -1,0 +1,108 @@
+﻿@page "{tournamentId:int}"
+@model KeyForge.GEMResultModel
+@{
+    ViewData["Title"] = "Nowy wyniki z systemu GEM";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GEMResult</title>
+</head>
+<body>
+    <h2>Zgłoś wiele wyników jednocześnie poprzez dane z systemu GEM</h2>
+    <h3>Wskaż plik Final Results.json zawierający dane całego turnieju z systemu GEM.</h3>
+    <table class="table">
+        <tr>
+            <td>
+                <a asp-page=".\ResultHub" class="btn btn-primary"> Powrót </a>
+            </td>
+        </tr>
+    </table>
+
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input id="winLoseList" type="hidden" asp-for="winLoseList" />
+            <input id="playerToDBDict" type="hidden" asp-for="playersToDB" />
+            <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
+            <input id="tournamentFactor" type="hidden" asp-for="Tournament.ELOFactor" />
+            <table class="table">
+                <tr>
+                    <td>
+                        <label>Wybrany turniej</label>
+                        <input asp-for="Tournament.Name" class="form-control" readonly />
+                        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        @if (Model.winLoseList.Count() == 0)
+        {
+            <input asp-for="FileUpload" id="uploadFiles" name="files" type="file" class="form-control-file" multiple data-show-upload="true" data-show-caption="true">
+            <p></p>
+            <button type="submit" class="btn btn-primary" asp-page-handler="File">Prześlij</button>
+        }
+    </form>
+
+    <form method="post">
+        @if (Model.winLoseList.Count() != 0)
+        {
+            <input type="hidden" asp-for="playersToDB" />
+            <input type="hidden" asp-for="Tournament.Id" />
+
+            <h3>Znaleziono następujące wyniki. Potwierdź ich poprawność i zatwierdź na dole strony.</h3>
+            <h3>Nierozpoznani gracze zostali już przypisani do wskazanego turnieju.</h3>
+
+            <table id="GEMTable" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <h3>Lp</h3>
+                        </th>
+                        <th>
+                            <h3>Zwycięzcy</h3>
+                        </th>
+                        <th>
+                            <h3>Pokonani</h3>
+                        </th>
+                    <tr>
+                </thead>
+                <tbody id="targetBody">
+                    @{ var i = 1; }
+                    @foreach (var row in Model.winLoseList)
+                    {
+                        <tr>
+                            <td>
+                                <input type="hidden" name="winLoseList.Index" value="@(i-1)" />
+                                <input type="hidden" name="winLoseList[@(i-1)].winner" value="@row.winner" />
+                                <input type="hidden" name="winLoseList[@(i-1)].loser" value="@row.loser" />
+                                @i
+                            </td>
+                            <td>
+                                @Model.playersToDB[row.winner]
+                            </td>
+                            <td>
+                                @Model.playersToDB[row.loser]
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+            <table class="table">
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Confirm">Zatwierdź</button>
+                    </td>
+                </tr>
+            </table>
+        }
+    </form>
+
+</body>
+</html>

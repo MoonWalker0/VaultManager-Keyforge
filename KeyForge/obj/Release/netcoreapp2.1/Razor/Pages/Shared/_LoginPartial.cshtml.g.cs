@@ -79,7 +79,7 @@ using KeyForge.Data;
             WriteLiteral("    ");
             EndContext();
             BeginContext(185, 554, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dcfe083536e24eea8a44fe20811b8804", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8e81804a2c40449caeb724dcfb591d12", async() => {
                 BeginContext(350, 95, true);
                 WriteLiteral("\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li>\r\n                <a>Witaj ");
                 EndContext();
@@ -148,7 +148,7 @@ else
             WriteLiteral("    <ul class=\"nav navbar-nav navbar-right\">\r\n        <li>");
             EndContext();
             BeginContext(811, 67, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a0bc92805514477896e016125fa7a8c2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c379604400e5438ca35c6a09859750b5", async() => {
                 BeginContext(863, 11, true);
                 WriteLiteral("Rejestracja");
                 EndContext();
@@ -172,7 +172,7 @@ else
             WriteLiteral("</li>\r\n        <li>");
             EndContext();
             BeginContext(897, 62, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3e29ae44fe2440d58f840a266d319fb2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2725d4abdbb44f71a4e85e91c2f12153", async() => {
                 BeginContext(946, 9, true);
                 WriteLiteral("Logowanie");
                 EndContext();

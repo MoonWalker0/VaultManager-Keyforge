@@ -44,7 +44,12 @@ namespace KeyForge
         {
             var tempTournament = (from r in _db.Tournament
                                   where r.Id == Tournament.Id
+                                        && r.Private == false
                                   select r).FirstOrDefault();
+            if (tempTournament == null)
+            {
+                return RedirectToPage("./NotFound");
+            }
 
             tempTournament.Shops = Tournament.Shops + ";" + User.Identity.Name;
             _db.SaveChanges();

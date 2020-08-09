@@ -19,5 +19,7 @@ namespace KeyForge.Data
         public DbSet<Player> Player { get; set; }
         public DbSet<ELOTable> ELOTable { get; set; }
         public DbSet<History> History { get; set; } 
+        public DbSet<Attachments> Attachments { get; set; }
+        public DbSet<AttachmentAssignment> AttachmentAssignment { get; set; }
     }
 }

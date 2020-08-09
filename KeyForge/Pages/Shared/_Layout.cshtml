@@ -12,11 +12,14 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />-->
+        <!--<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />-->
     </environment>
+    <script type="text/javascript">(function () { var css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();</script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +31,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">Vault Manager</a>
+                <a asp-page="/Index" class="navbar-brand">
+                    <img src="~/title.png" style="height: 25px; width: 200px" />
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -40,7 +45,8 @@
                     }
                     <li><a asp-page="/IndexTournament">Turnieje</a></li>
                     <li><a asp-page="/About">Informacje</a></li>
-                    <li><a asp-page="/Changelog">Changelog</a></li>
+                    <li><a asp-page="/AttachmentHub" asp-route-tournamentId="0">Pliki</a></li>
+                    <li><a class="btn btn-lg" asp-page="/Changelog"><i class="fas fa-clock"></i></a></li>
                     <!--<li><a asp-page="/PlayerStats">StatystykiTemp</a></li>-->
                     <!-- <li><a asp-page="/Contact">Contact</a></li>-->
                 </ul>
@@ -80,6 +86,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false) 
 </body>
 </html>

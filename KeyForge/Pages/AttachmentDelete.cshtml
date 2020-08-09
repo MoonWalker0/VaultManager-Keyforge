@@ -1,0 +1,32 @@
+﻿@page "{attachmentId:int}"
+@model KeyForge.AttachmentDeleteModel
+@{
+    ViewData["Title"] = "Usuń";
+}
+
+<h2>Usuń plik</h2>
+<h3>Nie można cofnąć tej operacji.</h3>
+<h3>Upewnij się, że na pewno chcesz usunąć poniższy plik.</h3>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AttachmentView</title>
+</head>
+<body>
+    <form method="post">
+        <input type="hidden" asp-for="Attachment.Id" />
+        <table class="table">
+            <tr>
+                <td>
+                    <a asp-page=".\AttachmentHub" asp-route-tournamentId="0" class="btn btn-primary"> Powrót </a>
+                    <button type="submit" class="btn alert-danger" style="float: right;">Usuń</button>
+                </td>
+            </tr>
+        </table> 
+        <object data=@Model.Attachment.Data type="application/pdf" style="width: 100%; height: 600px"></object>
+    </form>
+</body>
+</html>

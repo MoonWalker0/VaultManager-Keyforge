@@ -18,34 +18,40 @@
             </td>
         </tr>
     </table>
-    <div class="form-group">
-        <label asp-for="Tournament.Name"></label>
-        <input asp-for="Tournament.Name" class="form-control" />
-        <span class="text-danger" asp-validation-for="Tournament.Name"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Tournament.Description"></label>
-        <input asp-for="Tournament.Description" class="form-control" />
-        <span class="text-danger" asp-validation-for="Tournament.Description"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Tournament.Private"></label>
-        <input type="checkbox" asp-for="Tournament.Private" class="form-control" />
-        <span class="checkbox" asp-validation-for="Tournament.Private"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Tournament.ELOFactor"></label>
-        <input type="number" asp-for="Tournament.ELOFactor" class="form-control" />
-        <span class="text-danger" asp-validation-for="Tournament.ELOFactor"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Tournament.DateFrom"></label>
-        <input type="date" asp-for="Tournament.DateFrom" class="form-control" />
-        <span class="text-danger" asp-validation-for="Tournament.DateFrom"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Tournament.DateTo"></label>
-        <input type="date" asp-for="Tournament.DateTo" class="form-control" />
-        <span class="text-danger" asp-validation-for="Tournament.DateTo"></span>
-    </div>
+    <table class="table">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="Tournament.Name"></label>
+                    <input asp-for="Tournament.Name" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tournament.Description"></label>
+                    <input asp-for="Tournament.Description" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Tournament.Description"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tournament.Private"></label>
+                    <input type="checkbox" asp-for="Tournament.Private" class="form-control" />
+                    <span class="checkbox" asp-validation-for="Tournament.Private"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tournament.ELOFactor"></label>
+                    <input type="number" asp-for="Tournament.ELOFactor" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Tournament.ELOFactor"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tournament.DateFrom"></label>
+                    <input type="date" asp-for="Tournament.DateFrom" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Tournament.DateFrom"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tournament.DateTo"></label>
+                    <input type="date" asp-for="Tournament.DateTo" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Tournament.DateTo"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
 </form>

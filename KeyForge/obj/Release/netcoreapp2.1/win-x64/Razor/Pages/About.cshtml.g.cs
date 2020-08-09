@@ -65,7 +65,7 @@ using KeyForge.Data;
             WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(149, 15, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf7e38666b6b453688ddc0bc98b6f0db", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2626b5f05eda41a8b963f930780f599e", async() => {
                 BeginContext(155, 2, true);
                 WriteLiteral("\r\n");
                 EndContext();
@@ -85,7 +85,7 @@ using KeyForge.Data;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(166, 3965, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e2e88952b9bc438b98eb91ceb76b365c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f0874dea468e4b6abc8acf482cef02a2", async() => {
                 BeginContext(172, 10, true);
                 WriteLiteral("\r\n    <h2>");
                 EndContext();

@@ -13,6 +13,8 @@ namespace KeyForge.Pages
     {
         [TempData]
         public string Message { get; set; }
+        [BindProperty]
+        public string ErrorMsg { get; set; }
         public IEnumerable<vHistory> History { get; set; }
         private readonly ApplicationDbContext _db;
 

@@ -13,37 +13,49 @@
             <h4 class="alert-danger">Rejestracja tylko dla organizatorów turnieju.</h4>
             <h4 class="alert-danger">Niezidentyifkowane próby rejestracji będą ignorowane.</h4>
             <hr />
-            <div class="form-group">
-                <label asp-for="Input.Company"></label>
-                <input asp-for="Input.Company" class="form-control" />
-                <span asp-validation-for="Input.Company" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Address"></label>
-                <input asp-for="Input.Address" class="form-control" />
-                <span asp-validation-for="Input.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h5 class="alert-danger">Co najmniej jedna duża litera, jedna mała litera, jedna cyfra i jeden znak specjalny.</h5>
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AuthId"></label>
-                <input asp-for="Input.AuthId" class="form-control" />
-                <span asp-validation-for="Input.AuthId" class="text-danger"></span>
-            </div>
+            <table class="table">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Input.Company"></label>
+                            <input asp-for="Input.Company" class="form-control" />
+                            <span asp-validation-for="Input.Company" class="text-danger"></span>
+                        </div> 
+
+                        <div class="form-group">
+                            <label asp-for="Input.Address"></label>
+                            <input asp-for="Input.Address" class="form-control" />
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <h5 class="alert-danger">Co najmniej jedna duża litera, jedna mała litera, jedna cyfra i jeden znak specjalny.</h5>
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Input.AuthId"></label>
+                            <input asp-for="Input.AuthId" class="form-control" />
+                            <span asp-validation-for="Input.AuthId" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
             <button type="submit" class="btn btn-default">Rejestruj</button>
         </form>
     </div>

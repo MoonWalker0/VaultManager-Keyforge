@@ -26,7 +26,9 @@ namespace KeyForge
         }
         public IActionResult OnGet(int? tournamentId)
         {
-            if(!_signInManager.IsSignedIn(User))
+            //User.Identity.Name == attachment.Email
+
+            if (!_signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("./NotFound");
             }
@@ -38,6 +40,13 @@ namespace KeyForge
             {
                 return RedirectToPage("./NotFound");
             }
+
+            //Check if author
+            if(Tournament.Originator != User.Identities.FirstOrDefault().Name)
+            {
+                return RedirectToPage("./NotFound");
+            }
+
             return Page();
         }
         public IActionResult OnPost()
@@ -45,6 +54,12 @@ namespace KeyForge
             var tempTournament = (from r in _db.Tournament
                                   where r.Id == Tournament.Id 
                                   select r).FirstOrDefault();
+
+            //Check if author
+            if (!_signInManager.IsSignedIn(User) || tempTournament.Originator != User.Identities.FirstOrDefault().Name)
+            {
+                return RedirectToPage("./NotFound");
+            }
 
             if (!ModelState.IsValid)
             { 

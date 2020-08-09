@@ -43,19 +43,13 @@
                             <option value=""></option>
                         </select>
                         <span class="text-danger" asp-validation-for="Tournament.Name"></span>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                    </div> 
 
         <!--hidden-->
         <input type="hidden" asp-for="Tournament.Name" />
         <input type="hidden" asp-for="Tournament.Id" />
         <!--hidden-->
-
-        <table class="table">
-            <tr>
-                <td>
+                     
                     <div class="form-group">
                         <input id="playerId" type="hidden" asp-for="ScannedPlayer.KFId" />
                         <label asp-for="ScannedPlayer.Name"></label>

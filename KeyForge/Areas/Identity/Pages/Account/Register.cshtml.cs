@@ -18,7 +18,9 @@ namespace KeyForge.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        
+
+        [TempData]
+        public string Message { get; set; }
         [BindProperty]
         public string ErrorMsg { get; set; }
 
@@ -58,7 +60,7 @@ namespace KeyForge.Areas.Identity.Pages.Account
             public string Address { get; set; }
 
             [Required(ErrorMessage = "To pole jest wymagane.")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Niepoprawny format adresu e-mail.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -120,20 +122,27 @@ namespace KeyForge.Areas.Identity.Pages.Account
                             values: new { userId = user.Id, code = code },
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        await _emailSender.SendEmailAsync(Input.Email, "VaultManager - Potwierdź e-mail",
+                            $"Potwierdź rejestrację konta klikając <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>tutaj</a>.");
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        //await _signInManager.SignInAsync(user, isPersistent: false);
+
+                        ErrorMsg = "Potwierdzenie wysłane na wskazany adres e-mail.";
+
                         return LocalRedirect(returnUrl);
                     }
                     foreach (var error in result.Errors)
                     {
+                        if(error.Code == "DuplicateUserName")
+                        {
+                            ErrorMsg += "Ten adres e-mail jest już zarejestrowany.\n";
+                        }
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
                 else
                 {
-                    ErrorMsg = "Invalid authentication code!";
+                    ErrorMsg = "Niepoprawne ID potwierdzające!";
                 }
             }
 

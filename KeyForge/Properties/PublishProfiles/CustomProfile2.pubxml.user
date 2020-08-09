@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ten plik jest wykorzystywany przez proces publikowania/pakowania projektu internetowego. Możesz dostosować zachowanie tego procesu
+ poprzez edycję tego pliku MSBuild. Aby dowiedzieć się więcej o tym działaniu, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbYn0TlGHkU6rIPrlWm30KwAAAAACAAAAAAAQZgAAAAEAACAAAADFibIHXnqG7oHUc8YaBkCfZehlQsvAy4rONHykTfeDDQAAAAAOgAAAAAIAACAAAAAzKb2on8fx/RvBWxvgT6cDryet7vjKS2vRQdAf4uH99CAAAACsJkHUI9LzXzsD5BnFwrlusIQiR7ChG9Jn8Zx8viy6jEAAAABQT2YT6C9jtvQfreQhUCRaj0ILFweqfz0Ct0bL+f01iP8uX72vBjWzwTZF24AnggZiP4PoOoroZsT6anUdn1rd</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5041.site4now.net%3bInitial Catalog=DB_A61331_VaultManager%3bUser Id=DB_A61331_VaultManager_admin%3bPassword=JEDIjedi007!%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

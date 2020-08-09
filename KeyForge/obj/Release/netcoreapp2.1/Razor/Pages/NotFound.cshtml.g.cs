@@ -66,7 +66,7 @@ using KeyForge.Data;
             WriteLiteral("\r\n<h1>Nie znaleziono!</h1>\r\n<h2>To nie jest strona, której szukasz!</h2>\r\n");
             EndContext();
             BeginContext(121, 74, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1d6322770f4742c9968a89e8955f7b99", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "815992d13703427aa6dab4774de32a96", async() => {
                 BeginContext(167, 24, true);
                 WriteLiteral("Powrót do strony głównej");
                 EndContext();

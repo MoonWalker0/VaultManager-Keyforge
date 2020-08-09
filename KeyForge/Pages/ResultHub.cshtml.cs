@@ -46,25 +46,23 @@ namespace KeyForge
             }
             return Page();
         }
-        
+
         public IActionResult OnPostSingle()
         {
-            //Show available tournaments assigned to this shop
-            AvailableTournaments = (from r in _db.Tournament
-                                    where r.Shops.Contains(User.Identity.Name) &&
-                                    r.DateFrom <= DateTime.UtcNow.Date &&
-                                    r.DateTo >= DateTime.UtcNow.Date
-                                    select new SelectListItem { Text = r.Name, Value = r.Id.ToString() }).ToList(); 
-
-            if (Tournament.Name == "0" || Tournament.Name == null)
-            {
-                ErrorMsg = "Choose a tournament.";
-                return Page();
-            }
-            return RedirectToPage("./Result/", new { tournamentId = Convert.ToInt32(Tournament.Name) });
+            return RedirectRoutine("Result"); 
         }
         public IActionResult OnPostMulti()
         {
+            return RedirectRoutine("MultiResult");
+        }
+        public IActionResult OnPostGEM()
+        {
+            return RedirectRoutine("GEMResult");
+        }
+
+        private IActionResult RedirectRoutine(string path)
+        {
+
             //Show available tournaments assigned to this shop
             AvailableTournaments = (from r in _db.Tournament
                                     where r.Shops.Contains(User.Identity.Name) &&
@@ -74,10 +72,10 @@ namespace KeyForge
 
             if (Tournament.Name == "0" || Tournament.Name == null)
             {
-                ErrorMsg = "Choose a tournament.";
+                ErrorMsg = "Wybierz turniej";
                 return Page();
             }
-            return RedirectToPage("./MultiResult/", new { tournamentId = Convert.ToInt32(Tournament.Name) });
+            return RedirectToPage("./" + path + "/", new { tournamentId = Convert.ToInt32(Tournament.Name) });
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿@page "{tournamentId:int}"
 @model KeyForge.ResultModel
 @{
-    ViewData["Title"] = "Nowy wynik"; 
+    ViewData["Title"] = "Nowy wynik";
 }
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +22,15 @@
         <div class="form-group">
             <input id="tournamentId" type="hidden" asp-for="Tournament.Id" />
             <input id="tournamentFactor" type="hidden" asp-for="Tournament.ELOFactor" />
-            <label>Wybrany turniej</label>
-            <input asp-for="Tournament.Name" class="form-control" readonly />
-            <span class="text-danger" asp-validation-for="Tournament.Name"></span>
+            <table class="table">
+                <tr>
+                    <td>
+                        <label>Wybrany turniej</label>
+                        <input asp-for="Tournament.Name" class="form-control" readonly />
+                        <span class="text-danger" asp-validation-for="Tournament.Name"></span> 
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
     <table class="table">
@@ -39,28 +45,56 @@
     <button onclick="stop();gum('user')" id="hCameraFront" class="btn btn-primary" style="display: none"> Kamera przednia </button>
     <button onclick="stop();gum('environment')" id="hCameraBack" class="btn btn-primary" style="display: none"> Kamera tylnia </button>
 
+    @section Scripts
+    {
+        <script src="//code.jquery.com/jquery.min.js"></script>
+        <link rel="stylesheet" href="~/lib/jquery-custom-search/jquery.dropdown.css">
+        <script src="~/lib/jquery-custom-search/jquery.dropdown.js"></script>
+        <script>
+            $(document).ready(function () { 
+                $('.winner').dropdown({ 
+                    minCount: 0,
+                    searchable: true,
+                    choice: function () {selectWinner()}
+                });
+                $('.loser').dropdown({ 
+                    minCount: 0,
+                    searchable: true,
+                    choice: function () {selectLoser()}
+                });
+            });
+        </script>
+    }
+
     <table class="table">
         <tr>
             <td>
                 <h3>Zwycięzca</h3>
                 <button id="captureWin" class="btn btn-primary"> Zeskanuj QR </button>
                 <label>lub wybierz z bazy graczy:</label>
-                <select id="selectWin" class="form-control" asp-for="PlayerWin.Name"
-                        asp-items="Model.AvailablePlayers" onchange="selectWinner()">
-                    <option value=""></option>
-                </select>
+                <div>
+                    <div class="winner">
+                        <select style="display:none" id="selectWin" class="form-control" asp-for="PlayerWin.Name"
+                                asp-items="Model.AvailablePlayers" onchange="selectWinner()">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
                 <span class="text-danger"></span>
-
             </td>
             <td>
                 <h3>Pokonany</h3>
                 <button id="captureLose" class="btn btn-primary"> Zeskanuj QR </button>
                 <label>lub wybierz z bazy graczy:</label>
-                <select id="selectLose" class="form-control" asp-for="PlayerLose.Name"
-                        asp-items="Model.AvailablePlayers" onchange="selectLoser()">
-                    <option value=""></option>
-                </select>
-                <span class="text-danger"></span>
+                <div>
+                    <div class="loser">
+                        <select style="display:none" id="selectLose" class="form-control" asp-for="PlayerLose.Name"
+                                asp-items="Model.AvailablePlayers" onchange="selectLoser()">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <span class="text-danger"></span> 
             </td>
         </tr>
     </table>
@@ -207,4 +241,4 @@
     </script>
 
 </body>
-    </html>
+</html>

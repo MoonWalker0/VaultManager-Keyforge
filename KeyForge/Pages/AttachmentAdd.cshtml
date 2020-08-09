@@ -1,0 +1,57 @@
+﻿@page
+@model AttachmentAddModel
+@{
+    ViewData["Title"] = "Dodaj plik";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head> 
+</head>
+<body>
+    <form method="post">
+        <table class="table">
+            <tr>
+                <td>
+                    <a asp-page=".\AttachmentHub" asp-route-tournamentId="0" class="btn btn-primary"> Powrót </a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h3 style="background-color:red;">@Model.ErrorMsg</h3>
+
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="FileUpload" id="uploadFiles" name="files" type="file" class="form-control-file" multiple data-show-upload="true" data-show-caption="true">
+
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label asp-for="Attachments.ShortDescription"></label>
+                        <input asp-for="Attachments.ShortDescription" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Attachments.ShortDescription"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Attachments.Description"></label>
+                        <input asp-for="Attachments.Description" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Attachments.Description"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Przypisz do turnieju</label>
+                        <select class="form-control" asp-for="TournamentID"
+                                asp-items="Model.AvailableTournaments">
+                            <option value=""></option>
+                        </select>  
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit" class="btn btn-primary" asp-page-handler="File">Prześlij</button>
+    </form>
+</body>
+</html>

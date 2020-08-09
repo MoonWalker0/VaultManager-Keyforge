@@ -25,8 +25,9 @@ namespace KeyForge.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
+        public InputModel Input { get; set; } 
+        [BindProperty]
+        public string ErrorMsg { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
@@ -37,7 +38,7 @@ namespace KeyForge.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Niepoprawny format adresu e-mail.")]
             public string Email { get; set; }
 
             [Required]
@@ -91,6 +92,7 @@ namespace KeyForge.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    ErrorMsg = "Logowanie nieudane - błędne dane lub niepotwierdzona rejestracja e-mail.";
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }

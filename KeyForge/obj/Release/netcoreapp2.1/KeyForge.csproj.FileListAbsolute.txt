@@ -85,3 +85,5 @@ C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\Razo
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\Razor\Pages\ResultHub.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\Razor\Pages\PlayerStats.cshtml.g.cs
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\Razor\Pages\Changelog.cshtml.g.cs
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Release\netcoreapp2.1\wwwroot\css\site.css
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\Razor\Pages\GEMResult.cshtml.g.cs

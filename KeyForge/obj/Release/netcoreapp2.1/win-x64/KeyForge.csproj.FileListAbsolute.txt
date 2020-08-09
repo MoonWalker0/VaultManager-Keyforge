@@ -86,3 +86,7 @@ C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\win-
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\win-x64\KeyForge.csproj.CopyComplete
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\win-x64\KeyForge.dll
 C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\win-x64\KeyForge.pdb
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Release\netcoreapp2.1\win-x64\hostpolicy.dll
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Release\netcoreapp2.1\win-x64\hostfxr.dll
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\bin\Release\netcoreapp2.1\win-x64\wwwroot\css\site.css
+C:\Users\jedrz\Desktop\KeyForge\KeyForge\KeyForge\obj\Release\netcoreapp2.1\win-x64\Razor\Pages\GEMResult.cshtml.g.cs

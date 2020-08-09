@@ -66,6 +66,7 @@ namespace KeyForge
                               where (r.PlayerWinId == playerId ||
                                       r.PlayerLoseId == playerId) &&
                                       r.TournamentId == tournamentId
+                              orderby r.Date ascending
                               select new { r.PlayerWinId, r.PlayerLoseId, r.Date, r.WinFinalELO, r.LoseFinalELO });
 
             List<int> xAxis = new List<int>();
@@ -82,7 +83,7 @@ namespace KeyForge
                 {
                     xAxis.Add(listPlayerData[i].LoseFinalELO);
                 }
-                yAxis.Add(listPlayerData[i].Date);
+                yAxis.Add(listPlayerData[i].Date.AddHours(9));
             }
 
             return new JsonResult(new { xAxis = xAxis, yAxis = yAxis });
